@@ -19,6 +19,7 @@ public class Ewizard {
     private static WebDriverWait wait = null;
     private static String cobaltId = "cobalt";
     private static String cobaltId2 = "cobalt_copy2";
+    private static String cobaltId3 = "cobalt_copy3";
 
     @BeforeClass
     public static void setup() {
@@ -34,7 +35,12 @@ public class Ewizard {
 
 //        wait
 //        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        wait = new WebDriverWait(driver, 20);
+//        wait = new WebDriverWait(driver, 20);
+        // TODO: 18.03.2018 add error message to webDriverWait
+//        wait = new WebDriverWait(driver, 20).withMessage("Error the element coudn't found");
+        // TODO: 18.03.2018 use typecasting
+        wait = (WebDriverWait) new WebDriverWait(driver, 20).withMessage("Error the element coudn't found");
+
 
         driver.get(url);
 
@@ -361,13 +367,35 @@ public class Ewizard {
 
         checkIfTheElementForHasEqualTitle(element2, "innerHTML","sun");
 
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-text_187ed57b"))));
         testUserClickOnElement("co-text_187ed57b");
 
-        testUserClickOnElement("co-image_b2b71d8f");
+//        driver.switchTo().parentFrame();
 
+
+        driver.switchTo().defaultContent();
+        waitUntillElementBecomeVisible("iframe");
+
+        driver.switchTo().frame(0);
+//        waitUntillElementBecomeVisible("iframe");
+//        waitUntillElementBecomeVisible(cobaltId3);
+        // TODO: 18.03.2018 use until method
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id(cobaltId3))));
+
+
+        switchToFrame(cobaltId3);
+
+        testUserClickOnElement("co-card_de4cd4be");
+
+//        testUserClickOnElement("co-image_b2b71d8f");
+//        #co-image_e6ba1752 > div
+        //*[@id="co-image_e6ba1752"]/div
+//        testUserClickOnElement("co-image_e6ba1752");
+
+//        /html/body/div/div/div/div/md-content/ewizard-viewer-presentation/div[1]/button[2]
     }
 
-    // TODO: 12.03.2018 create method to verificate title
+    // TODO: 12.03.2018 create method to vereficate title
     private void checkIfTheElementForHasEqualTitle(WebElement elementToCheck, String elementAttribute, String stringToCheck) {
         Assert.assertEquals(elementToCheck.getAttribute(elementAttribute).toLowerCase(), stringToCheck);
 //        System.out.println("TEST checkElementForEqualTitle");
