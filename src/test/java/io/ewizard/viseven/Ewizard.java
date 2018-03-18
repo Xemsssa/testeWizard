@@ -39,7 +39,7 @@ public class Ewizard {
         // TODO: 18.03.2018 add error message to webDriverWait
 //        wait = new WebDriverWait(driver, 20).withMessage("Error the element coudn't found");
         // TODO: 18.03.2018 use typecasting
-        wait = (WebDriverWait) new WebDriverWait(driver, 20).withMessage("Error the element coudn't found");
+        wait = (WebDriverWait) new WebDriverWait(driver, 10).withMessage("Error the element coudn't found");
 
 
         driver.get(url);
@@ -350,46 +350,68 @@ public class Ewizard {
     public void test2 (){
 
 //        calculateNumberOfElements("iframe");
-        waitUntillElementBecomeVisible("iframe");
+        wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("iframe"))));
+//        waitUntillElementBecomeVisible("iframe");
 
         driver.switchTo().frame(0);
 
 //        calculateNumberOfElements("iframe");
 
-        waitUntillElementBecomeVisible("iframe");
+//        waitUntillElementBecomeVisible("iframe");
+        wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("iframe"))));
+//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id(cobaltId))));
 
         switchToFrame(cobaltId);
 
         testUserClickOnElement("co-image_1b9210c1");
 
+//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-text_30f6873f"))));
 //        WebElement element2 = driver.findElement(By.xpath("//*[@id=\"co-text_30f6873f\"]/span/div[1]/font/b/u"));
         WebElement element2 = driver.findElement(By.cssSelector(" #co-text_30f6873f > span > div:nth-child(1) > font > b > u"));
 
         checkIfTheElementForHasEqualTitle(element2, "innerHTML","sun");
 
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-text_187ed57b"))));
+//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-text_187ed57b"))));
+//        waitUntillElementBecomeVisible("co-text_187ed57b");
         testUserClickOnElement("co-text_187ed57b");
 
 //        driver.switchTo().parentFrame();
-
-
         driver.switchTo().defaultContent();
-        waitUntillElementBecomeVisible("iframe");
+
+//        waitUntillElementBecomeVisible("iframe");
+        wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("iframe"))));
 
         driver.switchTo().frame(0);
 //        waitUntillElementBecomeVisible("iframe");
 //        waitUntillElementBecomeVisible(cobaltId3);
         // TODO: 18.03.2018 use until method
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id(cobaltId3))));
-
+//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id(cobaltId3))));
+        waitUntillElementBecomeVisible(cobaltId3);
 
         switchToFrame(cobaltId3);
 
+//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("cobalt_copy3"))));
+//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-card_de4cd4be"))));
+//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-card_5288fd0e"))));
+//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.tagName("co-card"))));
+//        waitUntillElementBecomeVisible("co-card_de4cd4be");
+        // TODO: 18.03.2018  if user click on left element "Energy transfer"
         testUserClickOnElement("co-card_de4cd4be");
 
+        // TODO: 18.03.2018 locate co-popup and check if it is visible
+        Boolean coCardValue = driver.findElement(By.id("co-popup_e5eff596")).getAttribute("class").contains("visible");
+        System.out.println(coCardValue);
+
+//        waitUntillElementBecomeVisible("co-popup_e5eff596");
+
+        // TODO: 18.03.2018  if user click on right element "Composition"
+        testUserClickOnElement("co-card_5288fd0e");
+
+        // TODO: 18.03.2018 check to user click on close button
 //        testUserClickOnElement("co-image_b2b71d8f");
 //        #co-image_e6ba1752 > div
-        //*[@id="co-image_e6ba1752"]/div
+//        //*[@id="co-image_e6ba1752"]/div
+//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-image_e6ba1752"))));
 //        testUserClickOnElement("co-image_e6ba1752");
 
 //        /html/body/div/div/div/div/md-content/ewizard-viewer-presentation/div[1]/button[2]
@@ -407,7 +429,8 @@ public class Ewizard {
     }
     // TODO: 12.03.2018 write method click on element
     private void testUserClickOnElement (String theIdOfElement) {
-        waitUntillElementBecomeVisible("co-image");
+//        waitUntillElementBecomeVisible("co-image");
+        waitUntillElementBecomeVisible(theIdOfElement);
         //*[@id="co-image_b2b71d8f"]
 //        WebElement element = driver.findElement(By.id("co-image_b2b71d8f"));
         WebElement element = driver.findElement(By.id(theIdOfElement));
@@ -430,7 +453,8 @@ public class Ewizard {
         driver.switchTo().frame(nameOfFrame);
     }
     // TODO: 11.03.2018 create method wait for element
-    private void waitUntillElementBecomeVisible(String nameOfSearchingElement) {
+//    private void waitUntillElementBecomeVisible(String nameOfSearchingElement) {
+    private void waitUntillElementBecomeVisible(String idOfSearchingElement) {
 //        wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("iframe"))));
 //        wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName(nameOfSearchingElement))));
 
@@ -438,9 +462,10 @@ public class Ewizard {
 //        driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 //            wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("co-text_a46e9e59"))));
 //        wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("co-popup"))));
-            wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName(nameOfSearchingElement))));
+//            wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName(nameOfSearchingElement))));
+            wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id(idOfSearchingElement))));
         } catch (Exception e ) {
-            System.out.println("Error! Element " + nameOfSearchingElement + " didn't load!");
+            System.out.println("Error! Element " + idOfSearchingElement + " didn't load!");
         }
 
     }
