@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -48,32 +49,36 @@ public class Ewizard {
     }
 
 
-    // TODO: 02.03.2018 case #1
     @Test
+    public void verificatePageTitle() {
+//        String urlTitle = "cobalt";
+        String urlTitle = "eWizard";
+        String siteTitle = "";
+//        String cobaltId = "cobalt";
+//        String cobaltId2 = "cobalt_copy2";
+
+        // TODO: 08.03.2018  wait
+//        WebDriverWait wait = new WebDriverWait(driver, 20);
+
+//        get site title
+//        driver.findElement(By.tagName("title"));
+//        siteTitle = driver.findElement(By.tagName("title")).getText();
+        siteTitle = driver.getTitle();
+
+        // TODO: 03.03.2018  check title of site
+//        if (urlTitle.contentEquals(siteTitle)) {
+////            "right" title
+//            System.out.println("Test passed! The site have title: " + siteTitle);
+//        } else {
+////            different title
+//            System.out.println("Test failed! Site have wrong title: " + siteTitle);
+//        }
+        Assert.assertEquals(siteTitle, urlTitle);
+    }
+
+    // TODO: 02.03.2018 case #1
+//    @Test
 //    public void test() {
-////        String urlTitle = "cobalt";
-//        String urlTitle = "eWizard";
-//        String siteTitle = "";
-////        String cobaltId = "cobalt";
-////        String cobaltId2 = "cobalt_copy2";
-//
-//        // TODO: 08.03.2018  wait
-////        WebDriverWait wait = new WebDriverWait(driver, 20);
-//
-////        get site title
-////        driver.findElement(By.tagName("title"));
-////        siteTitle = driver.findElement(By.tagName("title")).getText();
-//        siteTitle = driver.getTitle();
-//
-//        // TODO: 03.03.2018  check title of site
-////        if (urlTitle.contentEquals(siteTitle)) {
-//////            "right" title
-////            System.out.println("Test passed! The site have title: " + siteTitle);
-////        } else {
-//////            different title
-////            System.out.println("Test failed! Site have wrong title: " + siteTitle);
-////        }
-//        Assert.assertEquals(siteTitle, urlTitle);
 //
 ////		System.out.println("Full page source: " + driver.getPageSource());
 ////        System.out.println("Wait to iframes.");
@@ -346,10 +351,13 @@ public class Ewizard {
 ////        }
 //    }
 
+
     // TODO: 11.03.2018  case #2
+    @Test
     public void test2 (){
 
 //        calculateNumberOfElements("iframe");
+
         wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("iframe"))));
 //        waitUntillElementBecomeVisible("iframe");
 
@@ -363,14 +371,18 @@ public class Ewizard {
 
         switchToFrame(cobaltId);
 
+        // TODO: 18.03.2018 test user click on element "SUN"
         testUserClickOnElement("co-image_1b9210c1");
 
+        // TODO: 18.03.2018 check the title of palanet
 //        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-text_30f6873f"))));
 //        WebElement element2 = driver.findElement(By.xpath("//*[@id=\"co-text_30f6873f\"]/span/div[1]/font/b/u"));
         WebElement element2 = driver.findElement(By.cssSelector(" #co-text_30f6873f > span > div:nth-child(1) > font > b > u"));
 
         checkIfTheElementForHasEqualTitle(element2, "innerHTML","sun");
 
+
+        // TODO: 18.03.2018 check user click on "more info...." to get more about planet
 //        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-text_187ed57b"))));
 //        waitUntillElementBecomeVisible("co-text_187ed57b");
         testUserClickOnElement("co-text_187ed57b");
@@ -399,23 +411,32 @@ public class Ewizard {
         testUserClickOnElement("co-card_de4cd4be");
 
         // TODO: 18.03.2018 locate co-popup and check if it is visible
-        Boolean coCardValue = driver.findElement(By.id("co-popup_e5eff596")).getAttribute("class").contains("visible");
-        System.out.println(coCardValue);
-
+        // TODO: 19.03.2018 need remove class "visible" from co-popup with id="co-popup_e5eff596"
+        WebElement coCard = driver.findElement(By.id("co-popup_e5eff596"));
+//        Boolean coCardValue = coCard.getAttribute("class").contains("visible");
+//        System.out.println(coCardValue);
+//
+//        coCard.getAttribute("class").replace("default visible animated", "default animated");
+//
 //        waitUntillElementBecomeVisible("co-popup_e5eff596");
 
         // TODO: 18.03.2018  if user click on right element "Composition"
-        testUserClickOnElement("co-card_5288fd0e");
+//        testUserClickOnElement("co-card_5288fd0e");
 
-        // TODO: 18.03.2018 check to user click on close button
-//        testUserClickOnElement("co-image_b2b71d8f");
+        // TODO: 18.03.2018 check user click on close button
 //        #co-image_e6ba1752 > div
 //        //*[@id="co-image_e6ba1752"]/div
 //        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-image_e6ba1752"))));
-//        testUserClickOnElement("co-image_e6ba1752");
+        testUserClickOnElement("co-image_e6ba1752");
 
-//        /html/body/div/div/div/div/md-content/ewizard-viewer-presentation/div[1]/button[2]
     }
+
+//    // TODO: 21.03.2018 maybe need create after method
+//    @AfterMethod
+//    public void goBackTomMainPage() {
+////        driver.switchTo().parentFrame();
+//        driver.switchTo().defaultContent();
+//    }
 
     // TODO: 12.03.2018 create method to vereficate title
     private void checkIfTheElementForHasEqualTitle(WebElement elementToCheck, String elementAttribute, String stringToCheck) {
@@ -476,8 +497,8 @@ public class Ewizard {
     }
 
     // TODO: 10.03.2018 create methods
-//    @AfterClass
-    public static void tearDown() {
+//    @AfterTest
+    public static void afterTest() {
         driver.close();
         driver.quit();
     }
