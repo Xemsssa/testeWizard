@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.AssertJUnit;
 import org.testng.annotations.AfterMethod;
 
 import java.util.List;
@@ -48,7 +49,6 @@ public class Ewizard {
 
         System.out.println("Connect to site: " + url);
     }
-
 
     @Test
     public void verificatePageTitle() {
@@ -356,6 +356,8 @@ public class Ewizard {
     // TODO: 21.03.2018 case #2
     @Test
     public void testUserClickOnNeptune() {
+
+        System.out.println("Run testUserClickOnNeptune() method");
 //        calculateNumberOfElements("iframe");
 
         wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("iframe"))));
@@ -369,14 +371,20 @@ public class Ewizard {
 
         switchToFrame(cobaltId);
 
+        System.out.println("click on Neptune image");
         testUserClickOnElement("co-image_1b9210c1");
 //        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-text_30f6873f"))));
 
+
+        System.out.println("Check for pop-up");
         WebElement visibleEl = driver.findElement(By.className("visible"));
+
 //
 //        // TODO: 21.03.2018 rewrite to use method checkElementForEqualTitle
+//        Assert.assertEquals( "co-popup_c876a99f", visibleEl.getAttribute("id"));
 //        checkIfTheElementForHasEqualTitle(visibleEl, "id","co-popup_68ae027a");
-        checkIfTheElementForHasEqualTitle(visibleEl, "id","co-popup_c876a99f");
+        checkIfTheElementForHasEqualTitle(visibleEl, "id", "co-popup_c876a99f");
+
 
 //        #co-text_5a4bf337 > span > div:nth-child(1) > font > b > font > u
 //        WebElement element2 = driver.findElement(By.cssSelector("#co-text_5a4bf337 > span > div:nth-child(1) > font > b > font > u"));
@@ -384,6 +392,11 @@ public class Ewizard {
 //
 //        checkIfTheElementForHasEqualTitle(element2, "innerHTML", "neptune");
         checkIfTheElementForHasEqualTitle(element2, "innerHTML", "sun");
+
+    }
+
+    @Test
+    public void testUserClickToGetMoreInfoAboutNeptune() {
 
 //        testUserClickOnElement("co-text_d9601b24");
         testUserClickOnElement("co-text_187ed57b");
@@ -405,11 +418,14 @@ public class Ewizard {
 //        switchToFrame(cobaltId4);
         switchToFrame(cobaltId3);
 
-//        WebElement visibleEl2 = driver.findElement(By.className("visible"));
+        WebElement visibleEl2 = driver.findElement(By.className("visible"));
 
 //        checkIfTheElementForHasEqualTitle(visibleEl2, "id","co-popup_5580654d");
-//        checkIfTheElementForHasEqualTitle(visibleEl2, "id","co-popup_5580654d");
+        checkIfTheElementForHasEqualTitle(visibleEl2, "id","co-popup_5580654d");
+    }
 
+    @Test
+    public void testUserClickOnCloseButton() {
 //        testUserClickOnElement("co-image_3db3bcfa");
         testUserClickOnElement("co-image_e6ba1752");
 
@@ -517,10 +533,17 @@ public class Ewizard {
 //        driver.switchTo().defaultContent();
 //    }
 
-    // TODO: 12.03.2018 create method to vereficate title
+    // TODO: 12.03.2018 create method to verificate title
     private void checkIfTheElementForHasEqualTitle(WebElement elementToCheck, String elementAttribute, String stringToCheck) {
-        Assert.assertEquals(stringToCheck, elementToCheck.getAttribute(elementAttribute).toLowerCase());
-//        System.out.println("TEST checkElementForEqualTitle");
+        System.out.println("TEST checkElementForEqualTitle");
+        String attribute = elementToCheck.getAttribute(elementAttribute).toLowerCase();
+        try {
+            Assert.assertEquals(stringToCheck, attribute);
+            System.out.println(stringToCheck + " == " + attribute);
+        } catch (AssertionError e) {
+            System.out.println("Assertion error: " + e);
+            System.out.println(stringToCheck + " != " + attribute);
+        }
     }
 
     // TODO: 11.03.2018 create method witch calculate size of element
