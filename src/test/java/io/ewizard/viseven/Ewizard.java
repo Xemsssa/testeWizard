@@ -1,3 +1,14 @@
+/**
+ * created by xemsss@gmail.com
+ *
+ * How to remove class from webElement
+ * How to create order
+ * Need find how operate with video
+ *
+ *
+ **/
+
+
 package io.ewizard.viseven;
 
 import org.apache.http.util.Asserts;
@@ -6,12 +17,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.AssertJUnit;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -25,6 +39,7 @@ public class Ewizard {
     private static String cobaltId4 = "cobalt_copy4";
 
     @BeforeClass
+//    @BeforeMethod
     public static void setup() {
         //  TODO: 03.03.2018  load WebDriver
 //		System.setProperty("webdriver.chrome.driver", "c:\chromedriver\chromedriver.exe");
@@ -42,15 +57,14 @@ public class Ewizard {
         // TODO: 18.03.2018 add error message to webDriverWait
 //        wait = new WebDriverWait(driver, 20).withMessage("Error the element coudn't found");
         // TODO: 18.03.2018 use typecasting
-        wait = (WebDriverWait) new WebDriverWait(driver, 10).withMessage("Error the element coudn't found");
-
+        wait = (WebDriverWait) new WebDriverWait(driver, 20).withMessage("Error the element coudn't found");
 
         driver.get(url);
 
         System.out.println("Connect to site: " + url);
     }
 
-    @Test
+    @Test ()
     public void verificatePageTitle() {
 //        String urlTitle = "cobalt";
         String urlTitle = "eWizard";
@@ -353,11 +367,96 @@ public class Ewizard {
 //    }
 
 
-    // TODO: 21.03.2018 case #2
-    @Test
-    public void testUserClickOnNeptune() {
+//    // TODO: 21.03.2018 case #2
+//    @Test
+//    public void testUserClickOnNeptune() {
+//
+//        System.out.println("Run testUserClickOnNeptune() method");
+////        calculateNumberOfElements("iframe");
+//
+//        wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("iframe"))));
+////        waitUntillElementBecomeVisible("iframe");
+//
+//        driver.switchTo().frame(0);
+//
+////        calculateNumberOfElements("iframe");
+//
+//        wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("iframe"))));
+//
+//        switchToFrame(cobaltId);
+//
+//        System.out.println("click on Neptune image");
+//
+//        // TODO: for neptune
+////        testUserClickOnElement("co-image_1b9210c1");
+//        // TODO: for sun
+//        testUserClickOnElement("co-image_fd3edee9");
+//
+////        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-text_30f6873f"))));
+//
+//        System.out.println("Check for pop-up");
+//        WebElement visibleEl = driver.findElement(By.className("visible"));
+//
+////
+////        // TODO: 21.03.2018 rewrite to use method checkElementForEqualTitle
+////        Assert.assertEquals( "co-popup_c876a99f", visibleEl.getAttribute("id"));
+//        checkIfTheElementForHasEqualTitle(visibleEl, "id","co-popup_68ae027a");
+////        checkIfTheElementForHasEqualTitle(visibleEl, "id", "co-popup_c876a99f");
+//
+//
+////        #co-text_5a4bf337 > span > div:nth-child(1) > font > b > font > u
+//        WebElement element2 = driver.findElement(By.cssSelector("#co-text_5a4bf337 > span > div:nth-child(1) > font > b > font > u"));
+////        WebElement element2 = driver.findElement(By.cssSelector("#co-text_30f6873f > span > div:nth-child(1) > font > b > u"));
+////
+//        checkIfTheElementForHasEqualTitle(element2, "innerHTML", "neptune");
+////        checkIfTheElementForHasEqualTitle(element2, "innerHTML", "sun");
+//
+////        wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("co-text_d9601b24"))));
+//        waitUntillElementBecomeVisible("co-text_d9601b24");
+//
+//        testUserClickOnElement("co-text_d9601b24");
+////        testUserClickOnElement("co-text_187ed57b");
+//
+//        //        driver.switchTo().parentFrame();
+//        driver.switchTo().defaultContent();
+//
+////        waitUntillElementBecomeVisible("iframe");
+//        wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("iframe"))));
+//
+//        driver.switchTo().frame(0);
+////        waitUntillElementBecomeVisible("iframe");
+////        waitUntillElementBecomeVisible(cobaltId3);
+//        // TODO: 21.03.2018 use until method
+////        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id(cobaltId4))));
+//        waitUntillElementBecomeVisible(cobaltId4);
+////        waitUntillElementBecomeVisible(cobaltId3);
+//
+//        switchToFrame(cobaltId4);
+////        switchToFrame(cobaltId3);
+//
+////        System.out.println(driver.getPageSource());
+////        waitUntillElementBecomeVisible(cobaltId4);
+////        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+////        wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("co-popup_5580654d"))));
+//        wait.until(ExpectedConditions.visibilityOfElementLocated((By.className("visible"))));
+//        WebElement visibleEl2 = driver.findElement(By.className("visible"));
+////
+//        checkIfTheElementForHasEqualTitle(visibleEl2, "id","co-popup_5580654d");
+////        wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("co-image_e6ba1752"))));
+//        waitUntillElementBecomeVisible("co-image_3db3bcfa");
+//
+////        testUserClickOnElement("co-image_e6ba1752");
+//        testUserClickOnElement("co-image_3db3bcfa");
+//
+//        driver.switchTo().defaultContent();
+////        driver.close();
+//    }
 
-        System.out.println("Run testUserClickOnNeptune() method");
+
+    // TODO: 11.03.2018  case #3
+    @Test
+    public void testUserClickOnSun () {
+
 //        calculateNumberOfElements("iframe");
 
         wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("iframe"))));
@@ -367,165 +466,99 @@ public class Ewizard {
 
 //        calculateNumberOfElements("iframe");
 
+//        waitUntillElementBecomeVisible("iframe");
         wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("iframe"))));
+//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id(cobaltId))));
 
         switchToFrame(cobaltId);
 
-        System.out.println("click on Neptune image");
-        testUserClickOnElement("co-image_1b9210c1");
+        // TODO: for neptune
+         testUserClickOnElement("co-image_1b9210c1");
+//        // TODO: for sun
+//        testUserClickOnElement("co-image_fd3edee9");
+
+        // TODO: 18.03.2018 check the title of planet
 //        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-text_30f6873f"))));
+        waitUntillElementBecomeVisible("co-text_30f6873f");
+//        WebElement element2 = driver.findElement(By.xpath("//*[@id=\"co-text_30f6873f\"]/span/div[1]/font/b/u"));
+        WebElement element2 = driver.findElement(By.cssSelector(" #co-text_30f6873f > span > div:nth-child(1) > font > b > u"));
 
-
-        System.out.println("Check for pop-up");
-        WebElement visibleEl = driver.findElement(By.className("visible"));
-
-//
-//        // TODO: 21.03.2018 rewrite to use method checkElementForEqualTitle
-//        Assert.assertEquals( "co-popup_c876a99f", visibleEl.getAttribute("id"));
-//        checkIfTheElementForHasEqualTitle(visibleEl, "id","co-popup_68ae027a");
-        checkIfTheElementForHasEqualTitle(visibleEl, "id", "co-popup_c876a99f");
-
-
-//        #co-text_5a4bf337 > span > div:nth-child(1) > font > b > font > u
-//        WebElement element2 = driver.findElement(By.cssSelector("#co-text_5a4bf337 > span > div:nth-child(1) > font > b > font > u"));
-        WebElement element2 = driver.findElement(By.cssSelector("#co-text_30f6873f > span > div:nth-child(1) > font > b > u"));
-//
-//        checkIfTheElementForHasEqualTitle(element2, "innerHTML", "neptune");
         checkIfTheElementForHasEqualTitle(element2, "innerHTML", "sun");
 
-    }
-
-    @Test
-    public void testUserClickToGetMoreInfoAboutNeptune() {
-
-//        testUserClickOnElement("co-text_d9601b24");
+        // TODO: 18.03.2018 check user click on "more info...." to get more about planet
+//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-text_187ed57b"))));
+//        waitUntillElementBecomeVisible("co-text_187ed57b");
         testUserClickOnElement("co-text_187ed57b");
 
-        //        driver.switchTo().parentFrame();
+//        driver.switchTo().parentFrame();
         driver.switchTo().defaultContent();
 
-////        waitUntillElementBecomeVisible("iframe");
+//        waitUntillElementBecomeVisible("iframe");
         wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("iframe"))));
-//
+
         driver.switchTo().frame(0);
-////        waitUntillElementBecomeVisible("iframe");
-////        waitUntillElementBecomeVisible(cobaltId3);
-        // TODO: 21.03.2018 use until method
-////        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id(cobaltId4))));
-//        waitUntillElementBecomeVisible(cobaltId4);
+//        waitUntillElementBecomeVisible("iframe");
+//        waitUntillElementBecomeVisible(cobaltId3);
+        // TODO: 18.03.2018 use until method
+//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id(cobaltId3))));
         waitUntillElementBecomeVisible(cobaltId3);
 
-//        switchToFrame(cobaltId4);
         switchToFrame(cobaltId3);
 
-        WebElement visibleEl2 = driver.findElement(By.className("visible"));
+//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("cobalt_copy3"))));
+//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-card_de4cd4be"))));
+//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-card_5288fd0e"))));
+//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.tagName("co-card"))));
 
-//        checkIfTheElementForHasEqualTitle(visibleEl2, "id","co-popup_5580654d");
-        checkIfTheElementForHasEqualTitle(visibleEl2, "id","co-popup_5580654d");
-    }
+        waitUntillElementBecomeVisible("co-card_de4cd4be");
 
-    @Test
-    public void testUserClickOnCloseButton() {
-//        testUserClickOnElement("co-image_3db3bcfa");
-        testUserClickOnElement("co-image_e6ba1752");
-
-    }
-
-//    // TODO: 11.03.2018  case #3
-//    @Test
-//    public void testUserClickOnSunToGet () {
-//
-////        calculateNumberOfElements("iframe");
-//
-//        wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("iframe"))));
-////        waitUntillElementBecomeVisible("iframe");
-//
-//        driver.switchTo().frame(0);
-//
-////        calculateNumberOfElements("iframe");
-//
-////        waitUntillElementBecomeVisible("iframe");
-//        wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("iframe"))));
-////        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id(cobaltId))));
-//
-//        switchToFrame(cobaltId);
-//
-//        // TODO: 18.03.2018 test user click on element "SUN"
-//        testUserClickOnElement("co-image_fd3edee9");
-//
-//        // TODO: 18.03.2018 check the title of planet
-//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-text_30f6873f"))));
-////        WebElement element2 = driver.findElement(By.xpath("//*[@id=\"co-text_30f6873f\"]/span/div[1]/font/b/u"));
-//        WebElement element2 = driver.findElement(By.cssSelector(" #co-text_30f6873f > span > div:nth-child(1) > font > b > u"));
-//
-//        checkIfTheElementForHasEqualTitle(element2, "innerHTML", "sun");
-//    }
-//
-//
-//    @Test
-//    public void testUserClickToGetMoreInfoAboutPlanet() {
-//
-//        // TODO: 18.03.2018 check user click on "more info...." to get more about planet
-////        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-text_187ed57b"))));
-////        waitUntillElementBecomeVisible("co-text_187ed57b");
-//        testUserClickOnElement("co-text_187ed57b");
-//
-////        driver.switchTo().parentFrame();
-//        driver.switchTo().defaultContent();
-//
-////        waitUntillElementBecomeVisible("iframe");
-//        wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("iframe"))));
-//
-//        driver.switchTo().frame(0);
-////        waitUntillElementBecomeVisible("iframe");
-////        waitUntillElementBecomeVisible(cobaltId3);
-//        // TODO: 18.03.2018 use until method
-////        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id(cobaltId3))));
-//        waitUntillElementBecomeVisible(cobaltId3);
-//
-//        switchToFrame(cobaltId3);
-//
-////        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("cobalt_copy3"))));
-////        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-card_de4cd4be"))));
-////        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-card_5288fd0e"))));
-////        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.tagName("co-card"))));
-////        waitUntillElementBecomeVisible("co-card_de4cd4be");
-//
-//    }
-//    @Test
-//    public void testUserClickOnEnergyTransfer() {
-//        // TODO: 18.03.2018  if user click on left element "Energy transfer"
+        // TODO: 18.03.2018  if user click on left element "Energy transfer"
 //        testUserClickOnElement("co-card_de4cd4be");
-//
-//        // TODO: 18.03.2018 locate co-popup and check if it is visible
-//        // TODO: 19.03.2018 need remove class "visible" from co-popup with id="co-popup_e5eff596"
+
+        // TODO: 18.03.2018 locate co-popup and check if it is visible
+        // TODO: 19.03.2018 need remove class "visible" from co-popup with id="co-popup_e5eff596"
 //        WebElement coCard = driver.findElement(By.id("co-popup_e5eff596"));
+//        WebElement coCard = driver.findElement(By.className("visible"));
 ////        Boolean coCardValue = coCard.getAttribute("class").contains("visible");
 ////        System.out.println(coCardValue);
 //
-//        // TODO: 21.03.2018 need to remove class visible
-////        coCard.getAttribute("class").replace("default visible animated", "default animated");
-////
-////        waitUntillElementBecomeVisible("co-popup_e5eff596");
-//    }
-//
-//    @Test
-//    public void testUserClickOnComposition() {
-//
+//        checkIfTheElementForHasEqualTitle(coCard, "id", "co-popup_e5eff596");
+
+        // TODO: 21.03.2018 need to remove class visible
+//        coCard.getAttribute("class").replace("default visible animated", "default animated");
+//        System.out.println(coCard.getAttribute("class"));
+//        #co-popup_e5eff596 > co-button > co-container > co-image > div
+//        waitUntillElementBecomeVisible("co-popup_e5eff596");
+//        driver.findElement(By.cssSelector("#co-popup_e5eff596 > co-button > co-container > co-image")).click();
+
+
 //        // TODO: 18.03.2018  if user click on right element "Composition"
-////        testUserClickOnElement("co-card_5288fd0e");
-//    }
-//
-//    @Test
-//    public void testUserClickOnCloseButton() {
+//        testUserClickOnElement("co-card_5288fd0e");
+//        WebElement coCard2 = driver.findElement(By.className("visible"));
+//        checkIfTheElementForHasEqualTitle(coCard2, "id", "co-card_5288fd0e");
+
+        WebElement videoButton = driver.findElement(By.id("co-image_b5d68f28"));
+        videoButton.click();
+
+        // TODO: 22.03.2018 need to find how operate video
+//        #co-video_b291d0b5 > div
+        //*[@id="co-video_b291d0b5"]/div
+//        driver.findElement(By.id("#co-video_b291d0b5 > div")).getAttribute("class").replace("video-player show-controls", "video-player playing");
+//        driver.findElement(By.xpath("//*[@id=\"co-video_b291d0b5\"]/div")).getAttribute("class").replace("video-player show-controls", "video-player playing");
+
+
 //        // TODO: 18.03.2018 check user click on close button
 ////        #co-image_e6ba1752 > div
 ////        //*[@id="co-image_e6ba1752"]/div
 ////        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("co-image_e6ba1752"))));
-//        testUserClickOnElement("co-image_e6ba1752");
-//    }
+        testUserClickOnElement("co-image_e6ba1752");
 
+        driver.switchTo().defaultContent();
+    }
 
+    // TODO: 22.03.2018  maybe need create class with all this method
+
+//
 //    // TODO: 21.03.2018 maybe need create after method
 //    @AfterMethod
 //    public void goBackTomMainPage() {
@@ -551,6 +584,7 @@ public class Ewizard {
         List iframe = driver.findElements(By.tagName(typeOfElement));
         System.out.println("There are elements: " + iframe.size() + " tagName " +  typeOfElement);
     }
+
     // TODO: 12.03.2018 write method click on element
     private void testUserClickOnElement (String theIdOfElement) {
 //        waitUntillElementBecomeVisible("co-image");
@@ -576,6 +610,7 @@ public class Ewizard {
 //        driver.switchTo().frame(cobaltId);
         driver.switchTo().frame(nameOfFrame);
     }
+
     // TODO: 11.03.2018 create method wait for element
 //    private void waitUntillElementBecomeVisible(String nameOfSearchingElement) {
     private void waitUntillElementBecomeVisible(String idOfSearchingElement) {
@@ -599,8 +634,8 @@ public class Ewizard {
         System.out.println("Full page source: " + driver.getPageSource());
     }
 
-    // TODO: 10.03.2018 create methods
-//    @AfterTest
+//    // TODO: 10.03.2018 create methods
+//    @AfterMethod
 //    public static void afterTest() {
 //        driver.close();
 //        driver.quit();
