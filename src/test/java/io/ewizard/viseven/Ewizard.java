@@ -2,9 +2,9 @@
  * created by xemsss@gmail.com
  *
  * How to remove class from webElement
- * How to create order
+ * Solved. How to create order
  * Need find how operate with video
- *
+ * Maybe need to move all methods to separated class?
  *
  **/
 
@@ -14,7 +14,7 @@ package io.ewizard.viseven;
 import org.apache.http.util.Asserts;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Test;
+//import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -24,8 +24,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.AssertJUnit;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -40,7 +39,8 @@ public class Ewizard {
 
 
 //    @before
-    @BeforeClass
+    @BeforeTest
+//    @BeforeClass
 //    @BeforeMethod
     public static void setup() {
         //  TODO: 03.03.2018  load WebDriver
@@ -54,7 +54,7 @@ public class Ewizard {
         driver = new ChromeDriver();
 
 //        wait
-//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 //        wait = new WebDriverWait(driver, 20);
         // TODO: 18.03.2018 add error message to webDriverWait
 //        wait = new WebDriverWait(driver, 20).withMessage("Error the element coudn't found");
@@ -66,7 +66,8 @@ public class Ewizard {
         System.out.println("Connect to site: " + url);
     }
 
-    @Test ()
+//    @Test
+    @Test(priority = 0)
     public void verificatePageTitle() {
 //        String urlTitle = "cobalt";
         String urlTitle = "eWizard";
@@ -94,7 +95,8 @@ public class Ewizard {
     }
 
 //     TODO: 02.03.2018 case #1
-    @Test
+//    @Test
+    @Test(priority = 1)
     public void testUserClickOnMoon() {
 
         System.out.println("Run testUserClickOnMoon() method");
@@ -326,6 +328,7 @@ public class Ewizard {
         // TODO: 10.03.2018  back to main
 //        /html/body/div/div/div/div/md-content/ewizard-viewer-presentation/div[1]/button[2]/i
 //        /html/body/div/div/div/div/md-content/ewizard-viewer-presentation/div[1]/button[2]
+
         System.out.println(driver.getPageSource());
 
 //        driver.findElement(By.cssSelector("button[class=\"ew-button\"]")).click();
@@ -349,7 +352,8 @@ public class Ewizard {
 ////            System.out.println("Click problem with " + back.getTagName() + "!");
 ////        }
 
-        waitUntillElementBecomeVisible("co-image_b2b71d8f");
+//        waitUntillElementBecomeVisible("co-image_b2b71d8f");
+        wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("co-image_b2b71d8f"))));
 
         // TODO: 12.03.2018 rewrite to use testUserClickOnElement
         testUserClickOnElement("co-image_b2b71d8f");
@@ -387,7 +391,8 @@ public class Ewizard {
 
 
     // TODO: 21.03.2018 case #2
-    @Test
+//    @Test
+    @Test(priority = 2)
     public void testUserClickOnNeptune() {
 
         System.out.println("Run testUserClickOnNeptune() method");
@@ -473,7 +478,8 @@ public class Ewizard {
 
 
     // TODO: 11.03.2018  case #3
-    @Test
+//    @Test
+    @Test(priority = 3)
     public void testUserClickOnSun () {
 
 //        calculateNumberOfElements("iframe");
@@ -654,7 +660,8 @@ public class Ewizard {
     }
 
 //    // TODO: 10.03.2018 create methods
-    @AfterMethod
+//    @AfterMethod
+    @AfterTest
     public static void afterTest() {
         driver.close();
         driver.quit();
